@@ -2,11 +2,12 @@ import java.net.*;
 import java.io.*;
 import java.text.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class Server {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ServerSocket serverSocket = new ServerSocket(10000);
         int counter = 0;
 
@@ -26,6 +27,8 @@ public class Server {
             writer.write(response);
             writer.flush();
             System.out.println("Client accepted " + counter++);
+
+            TimeUnit.SECONDS.sleep(1);
 
             writer.close();
             reader.close();
