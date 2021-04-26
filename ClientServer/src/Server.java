@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.text.*;
+import java.util.Date;
 
 
 public class Server {
@@ -16,17 +17,15 @@ public class Server {
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             String request = reader.readLine();
-            String response = counter + ", ur message length is " + request.length() + "\n";
 
-            /* Writer для корректного отображения в браузерах
-            writer.write("HTTP/1.0 200 OK\r\n" +
-                    "Content-type: text/html\r\n" +
-                    "\r\n" +
-                    "<H2>Hello</H2>\r\n");
-             */
+            Date dateNow = new Date();
+            SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss a zzz");
+
+            String response = "Текущая дата " + formatForDateNow.format(dateNow) + "\n";
+
             writer.write(response);
-            System.out.println("Client accepted " + counter++);
             writer.flush();
+            System.out.println("Client accepted " + counter++);
 
             writer.close();
             reader.close();
