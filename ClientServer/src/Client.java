@@ -1,8 +1,9 @@
 import java.net.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         for (int i = 0; i < 60; i++) {
             Socket clientSocket = new Socket("127.0.0.1", 10000);
@@ -20,6 +21,7 @@ public class Client {
             writer.close();
 
             clientSocket.close();
+            TimeUnit.SECONDS.sleep(1);
         }
     }
 }
